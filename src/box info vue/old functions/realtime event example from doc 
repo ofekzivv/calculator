@@ -1,0 +1,35 @@
+ original from doc in firebase:
+
+firebaseInstance.firebase.auth().onAuthStateChanged((user) => {
+
+    firebaseInstance.firebase.database().ref('employees/' + user.uid + '/data')
+        .on('child_changed', (snapshot) => {
+            const data = snapshot.val();
+            alert(JSON.stringify(data))
+        });
+})
+
+after we match it to our project and did it work in realtime (on live):
+
+this func just got me the ref that i want point to it,
+function getRef(options) {
+    return firebaseInstance.firebase.database().ref(`employees/${window.user.uid}/data/${options.entity}`)
+}
+
+event on component example:
+ in component we use the event type like: 'child_changed'.
+ example:
+
+ created() {
+
+     firebaseDatabase.getRef({entity: this.tableName})
+         .on('child_changed', (result) => {
+           let data = result.val();
+           for (let i = 0; i < this.rows.length; i++) {
+             if (result.key === this.rows[i].id) {
+               Object.assign(this.rows[i], data)
+             }
+           }
+         })
+         }
+
