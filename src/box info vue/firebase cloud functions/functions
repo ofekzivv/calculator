@@ -3,6 +3,19 @@ cloud Functions for Firebase is a serverless framework that lets you
  Your JavaScript or TypeScript code is stored in Google's cloud and runs in a managed environment.
  There's no need to manage and scale your own servers.
 
+ 1-
+ first we need to see that the back side are working
+ so we use "ping" request to server
+ and expecting to get response of "pong"
+
+ ping pong example:
+
+ exports.ping = functions.https.onRequest((request, response) => {
+   functions.logger.info("Hello logs! pong", {structuredData: true});
+   response.send("pong");
+ });
+
+2-
  example code for function:
 
  // Listens for new messages added to /messages/:documentId/original and creates an
@@ -25,4 +38,4 @@ cloud Functions for Firebase is a serverless framework that lets you
 
 
  -we put in cloud functions some functions that we dont want to  changed or use by our users.
-  
+ :todo coming soon...

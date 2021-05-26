@@ -1,0 +1,54 @@
+first steps:
+we import our relevant functions from the store to our component in <script>.
+then we remove/change the local data(like: rows[]) of our component cause in Vuex we dont need to work with local data,
+and now we changed to the data that sit in our "state"(like:employees).
+to listen to any change that happen in data we do it with: "Computed"
+any properties that we put in "Computed" the will "watch" to change that happen in properties in store.
+
+example:
+<script>
+import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
+
+export default {
+  name: "??",
+  data() {
+    return {
+'??'
+      columns: [
+        {name: '??', align: 'center', label: ' ??', field: '??', sortable: true},
+        {name: '??', align: 'center', label: ' ??', field: '??', sortable: true},
+        {name: '??', label: '?? ', field: '??', sortable: true},
+        {name: '??', label: '?? ', field: '??'},
+        {name: '??', label: ' ??', field: '??', sortable: true},
+      ],
+      rows: []
+        }
+        },
+
+    ///we remove local data ( in this case its rows)
+      //rows: []
+      we put instead the state data parameters with "Computed"
+      computed: mapState('items', ['editedItemId','items']),
+
+second step:
+
+we change now the relevant functions in method and put what we create in "Actions"
+
+example:
+  methods: {
+
+  //we put all relevant functions that we create in "Actions"
+  //and remove what we create without Vuex
+...mapActions('employees', ['deleteEmployee', "getEmployees"]),
+
+//so we see that we remove our old delete and read function
+
+    updateEmployee(id) {
+      this.$router.push(`/update/${id}`);
+    }
+  },
+
+step three: Created
+in created in our component until now we listen to changes with realtime events (.on(??)).
+but now cause the store take care of our changes we dont need anymore to use those events.
+*todo: explore more if we need to use in other cases with realtime event (maybe local).

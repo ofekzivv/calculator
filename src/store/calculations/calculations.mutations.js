@@ -1,18 +1,18 @@
 export default {
+// Calculations
+    setCalculations: ((state, Calculations) => state.calculations = Calculations),
 
-    setEmployees: ((state, employees) => state.employees = employees),
+    setEditedCalculation: ((state, Calculations) => state.editedCalculation = Calculations),
 
-    setEditedEmployee: ((state, employees) => state.editedEmployee = employees),
+    setEditedCalculationId: ((state, id) => state.editedCalculationId = id),
 
-    setEditedEmployeeId: ((state, id) => state.editedEmployeeId = id),
+    resetEditedCalculationId: ((state) => state.editedCalculationId = ''),
 
-    resetEditedEmployeeId: ((state) => state.editedEmployeeId = ''),
-
-    resetEditedEmployee: ((state) => {
-        for (const key in state.editedEmployee) {
-            state.editedEmployee[key] = ''
+    resetEditedCalculation: ((state) => {
+        for (const key in state.editedCalculation) {
+            state.editedCalculation[key] = ''
         }
-        delete state.editedEmployee.id;
+        delete state.editedCalculation.id;
     }),
 
     deleteEmployee: ((state, employeeId) => {
@@ -25,7 +25,7 @@ export default {
         state.employees.splice(index, 1, employee)
     }),
 
-    insertEmployee: ((state, employee) => {
-        state.employees.push(employee)
+    insertCalculation: ((state, calculation) => {
+        state.calculations.push(calculation)
     })
 }

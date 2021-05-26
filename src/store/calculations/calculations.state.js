@@ -1,12 +1,12 @@
 export default {
-    employees: [],
+    calculations: [],
 
-    editedEmployeeId: '',
+    editedCalculationId: '',
 
-    editedEmployee: {
-        firstName: '',
-        lastName: '',
-        jobTitle: '',
-        basicWage: 0,
+    editedCalculation: {
+        firstDate:'',
+        lastDate:'',
+        workHours:0,
+        brake:0,
     }
 }

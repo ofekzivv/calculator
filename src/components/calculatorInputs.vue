@@ -1,24 +1,60 @@
 <template>
-  <q-page-container>
-  <h1>?מה השכר שלך</h1>
+  <q-page-container dir="rtl">
+  <h1>מה השכר שלך?</h1>
     <div class="calInputs" dir="rtl">
-      <q-input outlined type="number" label="שכר שעתי" value="0" />
-      <q-input outlined type="number" label="שכר שעתי" value="0" />
-      <q-input outlined type="number" label="שכר שעתי" value="0" />
-      <q-input outlined type="number" label="שכר שעתי" value="0" />
-      <q-input outlined type="number" label="שכר שעתי" value="0" />
+      <q-input outlined  v-model="LocalCalculations.firstDate" type="date" label="מתאריך"/>
+      <q-input outlined  v-model="LocalCalculations.lastDate" type="date" label="עד תאריך"/>
+      <q-input outlined  v-model="LocalCalculations.workHours" type="time" label="שעות עבודה" value="0"/>
+      <q-input outlined  v-model="LocalCalculations.brake" type="time" label="זמן הפסקה"/>
 
-      <q-btn class="glossy" rounded color="green" label="חשב את השכר שלך" />
+      <q-btn class="glossy" rounded color="green" label="חשב את השכר שלך" @click="insertCal()"/>
     </div>
   </q-page-container>
 </template>
 
 <script>
+import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
+
+// import localStorageDriveCAL from '../middleware/local-storage/indexCalculator';
+// import api from '../middleware/API/index'
+
 export default {
-  name: "calculator",
+  name: "calculatorInputs",
+  props: ['tableName'],
   data() {
-    return {}
+    return {
+    LocalCalculations: {
+      firstDate:'',
+      lastDate:'',
+      workHours:0,
+      brake:0,
+    }
+    }
   },
+
+  computed: mapState('calculations', ['editedCalculation']),
+  methods:{
+    ...mapActions('calculations', ['insertCalculation', 'setEditedCalculationById']),
+    ...mapMutations('calculations', ['setCalculations', 'setEditedCalculationId', 'resetEditedCalculationId','setEditedCalculation']),
+
+    LocalSetCalculations() {
+      this.setEditedCalculation(this.LocalCalculations)
+    },
+
+    insertCal() {
+      this.LocalSetCalculations();
+      this.insertCalculation();
+    },
+  },
+  created() {
+    if (this.$route.params.id) {
+      this.setEditedEmployeeId(this.$route.params.id)
+      this.setEditedEmployeeById()
+          .then(() => {
+            Object.assign(this.LocalCalculations, this.editedCalculation)
+          })
+    }
+  }
 
 }
 </script>
@@ -42,13 +78,13 @@ h1 {
 }
 .calInputs{
   background-color: #fffcfc;
-  margin-left: 65%;
   width: 500px;
   padding: 1em;
   border: 3px solid #000000;
   border-radius: 1em;
   font-size: 30px;
 }
+
 
 
 

@@ -1,0 +1,28 @@
+Vuex :
+Vuex is a state management pattern(תבנית) + library(ספרייה) for Vue.js applications.
+It serves you as a central store for all the components in an application,
+with rules ensuring(המבטיחים) that "State" can be mutated(שינויים) just in predictably(באופן צפוי).
+any component can access the state or trigger actions, no matter where they are in the tree!
+By defining(הגדרה) and separating(הפרדה) of the concepts involved in the "State"
+we give our code more structure(מבנה) and maintainability(תחזוקה).
+Unlike the other patterns(תבניות):[redux,flux, elm Architecture] Vuex is also a library implementation tailored
+specifically(במיוחד) for Vue.js.
+
+Vuex helps us deal with shared state management.
+It's a trade-off between short term and long term productivity.
+if your app is simple, you will most likely be fine without Vuex,
+But if you are building a medium-to-large-*scale SPA,
+you think about how to better handle state outside of your Vue components,
+and Vuex will be the natural next step for you.
+
+
+1. On VueJS the methods influence the data(reactive) of the project, and in Vuex the actions can update the vuex state(reactive).
+
+2. Mutations are settings that influence the state (only mutations can influence the state) and they are configured with actions.
+
+3. Getters are filters that are getting specific data from the state but cannot make any changes.
+
+4. A good example of vuex complicity is starting with a component that dispatches data to actions (example: this.$store.dispatch('fetchTodos'))
+ then committing from actions to mutations and changing the data of the state.
+ this progress is circulating until the functions finish to do there job,
+ once the job is done the getters get the specific data from the state (example: this.$store.getters.doneTodos).

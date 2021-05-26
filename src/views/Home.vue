@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+ <home-header/>
+  <welcome-animation/>
+</div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+
+import HomeHeader from "../components/homeHeader";
+import WelcomeAnimation from "../components/welcomeAnimation";
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    WelcomeAnimation,
+    HomeHeader
   }
 }
 </script>
+
+<style>
+body {
+  background-image: url("https://www.morebusiness.com/wp-content/uploads/2007/10/calculator-tablet-pen.jpg");
+  height: 100%;
+  background-size: cover;
+}
+</style>

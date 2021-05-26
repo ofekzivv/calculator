@@ -1,7 +1,7 @@
-import state from './employees.state'
-import mutations from './employees.mutations'
-import actions from './employees.actions'
-import getters from './employees.getters'
+import state from './calculations.state'
+import mutations from './calculations.mutations'
+import actions from './calculations.actions'
+import getters from './calculations.getters'
 
 export default {
     namespaced: true,

@@ -1,6 +1,4 @@
-let localStorageFunctions = {
-    // putting in this object all functions that connect to "local storage dataBase"
-    // and to activate those functions you need to go this object and export specific function.
+export default {
 
     insertToDB:function (table, newEmployee) {
         // create/add id to the "item"
@@ -67,6 +65,13 @@ let localStorageFunctions = {
         // update the array to local-storage/database
         localStorage.setItem(table, JSON.stringify(employees));
     },
+    getItemById(table, id){
+        let employees = this.selectFromDB(table);
+       return  employees.find(function (employee) {
+            return employee.id === id;
+        })
+    },
+
     _searchById:function (table ,id) {
         let employees = this.selectFromDB(table);
         let foundEmployeeIndex = undefined;

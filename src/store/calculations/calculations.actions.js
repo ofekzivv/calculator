@@ -1,20 +1,36 @@
 import database from '../../middleware/firebase/database';
 
 export default {
-    getEmployees: async ({commit}) => {
-        const employees = await database.read({entity: 'employees'});
 
-        commit('setEmployees', employees)
+    getCalculations: async ({commit}) => {
+        const Calculations = await database.read({entity: 'Calculations'});
+
+        commit('setCalculations', Calculations)
     },
 
-    deleteEmployee: async ({state, commit}) => {
-        await database.remove({entity: 'employees', id: state.editedEmployeeId});
+    insertCalculation: async ({state, commit}) => {
 
-        const employeeId = state.editedEmployeeId;
+        const Calculation = {}
+
+        Object.assign(Calculation, state.editedCalculation)
+
+        //saves n DB
+        Calculation.id = (await database.create({entity: 'Calculations', item: Calculation})).key
+
+        //saves in store
+        commit('resetEditedCalculation')
+
+        commit('insertCalculation', Calculation)
+    },
+
+    deleteCalculation: async ({state, commit}) => {
+        await database.remove({entity: 'Calculations', id: state.editedCalculationId});
+
+        const CalculationId = state.editedCalculationId;
 
         commit('resetEditedEmployeeId')
 
-        commit('deleteEmployee', employeeId)
+        commit('deleteEmployee', CalculationId)
     },
 
     updateEmployee: async ({state, commit}) => {
@@ -26,7 +42,7 @@ export default {
 
         //saves in DB
         await database.updateItem({
-            entity: 'employees',
+            entity: 'Calculations',
             id: employee.id,
             employee
         })
@@ -38,29 +54,14 @@ export default {
         commit('editEmployee', employee)
     },
 
-    insertEmployee: async ({state, commit}) => {
-
-        const employee = {}
-
-        Object.assign(employee, state.editedEmployee)
-
-        //saves n DB
-        employee.id = (await database.create({entity: 'employees', employee})).key
-
-        //saves in store
-        commit('resetEditedEmployee')
-
-        commit('insertEmployee', employee)
-    },
-
-    setEditedEmployeeById: async ({state, commit}) => {
-        let employee = {}
-        if (state.employees.length && state.employees.find(employee => employee.id === state.editedEmployeeId)) {
-            employee = state.employees.find(employee => employee.id === state.editedEmployeeId);
+    setEditedCalculationById: async ({state, commit}) => {
+        let Calculation = {}
+        if (state.calculations.length && state.calculations.find(Calculation => Calculation.id === state.editedCalculationId)) {
+            Calculation = state.calculations.find(Calculation => Calculation.id === state.editedCalculationId);
         } else {
-            employee = await database.selectById({entity: 'employees', id: state.editedEmployeeId})
+            Calculation = await database.selectById({entity: 'Calculations', id: state.editedCalculationId})
         }
 
-        commit('setEditedEmployee', employee);
+        commit('setEditedEmployee', Calculation);
     }
 }
