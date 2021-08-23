@@ -16,10 +16,10 @@
           <q-td key="jobTitle" :props="props">{{ props.row.jobTitle }}</q-td>
           <q-td key="basicWage" :props="props">{{ props.row.basicWage }}</q-td>
           <q-td key="actions" :props="props">
-
             <q-btn outline class="deleteBtn" icon="delete" label="מחיקת משתמש" @click="remove(props.row.id)"/>
             <q-btn outline class="deleteBtn" icon="settings" label="עדכון משתמש" @click="goUpdatePage(props.row.id)"/>
           </q-td>
+
         </q-tr>
       </template>
     </q-table>
@@ -59,7 +59,6 @@ export default {
       this.setEditedEmployeeId(id)
       this.deleteEmployee()
       this.resetEditedEmployeeId();
-
     },
     goUpdatePage(id) {
       this.$router.push(`/update/${id}`);

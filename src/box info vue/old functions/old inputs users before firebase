@@ -1,0 +1,59 @@
+<template>
+  <div class="userInputs" dir="rtl">
+    <h4>הכנסת פרטים אישיים</h4>
+    <q-input outlined v-model="employee.firstName" type="text" label="שם פרטי"/>
+    <q-input outlined v-model="employee.lastName" type="text" label="שם משפחה"/>
+    <q-input outlined v-model="employee.jobTitle" type="text" label="סוג עבודה"/>
+    <q-input outlined v-model="employee.wage" type="number" label="שכר שעתי" value="0"/>
+
+
+    <q-btn v-if="!item" class="glossy" rounded color="green" label="צור עובד" @click="addEmployee()"/>
+    <q-btn v-if="item" class="glossy" rounded color="green" label="עדכון נתונים" @click="update()"/>
+    <q-btn class="glossy" rounded color="green" label="חפש עובד" @click="searchEmployee()"/>
+  </div>
+</template>
+
+<script>
+import api from '../middleware/API/index'
+// import localStorageDriver from '../middleware/local-storage/indexUsers'
+
+export default {
+  name: "inputsUsers",
+  props: ['tableName', 'item'],
+  data() {
+    return {
+      employee: {
+        firstName: '',
+        lastName: '',
+        jobTitle: '',
+        wage: 0,
+      }
+    }
+  },
+  methods: {
+
+    addEmployee() {
+      api.post({entity: this.tableName, employees: this.employee})
+          .then(() => {
+            this.$emit('itemAdded');
+          })
+    },
+    update() {
+      api.update({entity: this.tableName, employeeId: this.employee.id, employee: this.employee})
+          .then(() => {
+            this.$router.push(`/backOffice`);
+          })
+    },
+    searchEmployee() {
+      let array = localStorageDriver.selectFromDB(this.tableName);
+      this.$emit('search', array, this.employee);
+    }
+  },
+  async created() {
+    if (this.$route.params.id) {
+      const result = await api.selectById({entity: this.tableName, employeeId: Number(this.$route.params.id)})
+      this.employee = result.employee[0];
+    }
+  }
+}
+</script>

@@ -1,0 +1,16 @@
+env:
+when we develop our server-side we dont want to write in code information like: passwords,privat token and
+other important details.
+we can save those details directly into cloud(google,amazon,and....) or even in local file(like node).
+
+net explanation:
+env- example is the file that has every constants(קבועים) setups(הגדרות) that.
+env has but with no values, and only this one is versioned(מנוסח).
+... env file contains various(שונים) settings,
+one row – one KEY=VALUE pair.
+And then, within your server-side project code you can get those environment variables with function env('KEY').
+
+we can use some ways to write env:
+1- package: "dotenv".
+2- firebase: Enviromment configurations.
+3- node: local

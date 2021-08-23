@@ -20,3 +20,17 @@ exports.onCreateTest = functions.database.ref(`/employees/{userId}/data/employee
             return result
         })
 })
+
+exports.addUser = functions.auth.user().onCreate((userRecord) => {
+
+    const user = {
+        uid: userRecord.uid,
+        email: userRecord.email,
+        name: userRecord.displayName,
+    }
+
+        admin.firestore().collection('users').doc(user.uid)
+        .set(user)
+            .then(r => console.log(r))
+            .catch(e => console.log('ERROR: ', e.message))
+});

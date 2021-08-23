@@ -1,0 +1,47 @@
+*other option for update/changed event in realtime database:
+
+1-firebaseDatabase.getRef({entity: this.tableName})
+        .on('child_changed', (snapshot) => {
+          for (let player of this.rows) {
+            if (snapshot.val().id === player.id){
+              Object.assign(player, snapshot.val());
+            }
+         }
+
+
+2-firebaseDatabase.getRef({entity: this.tableName})
+        .on('child_changed', (snapshot) => {
+        let personId = snapshot.key;
+        let personData = snapshot.val();
+          let SelectedPerson = this.rows.filter(person => person.id === personId);
+          Object.assign(SelectedPerson[0],personData);
+        });
+
+
+*other option for add event in realtime database:
+
+firebaseDatabase.getRef({entity: this.tableName})
+         .on('child_added', (snapshot) => {
+           let newPlayer = snapshot.val()
+           this.rows.push(newPlayer);
+         });
+
+*other option for remove event in realtime database:
+
+1-firebaseDatabase.getRef({entity: this.tableName})
+        .on('child_removed', (snapshot) => {
+          let playerId = snapshot.key
+          this.rows = this.rows.filter(player => player.id !== playerId)
+        })
+
+
+2-firebaseDatabase.getRef({entity: this.tableName})
+          .on('child_removed', (snapshot) => {
+            let personId = snapshot.key;
+            for (let i = 0; i < this.rows.length; i++) {
+              if (this.rows[i].id === personId) {
+                this.rows.splice(i, 1);
+                break;
+              }
+            }
+          });

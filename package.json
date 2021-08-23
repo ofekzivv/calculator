@@ -7,16 +7,25 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "@quasar/extras": "1.10.4",
+    "core-js": "3.11.1",
+    "quasar": "1.15.11",
+    "vue": "2.6.12",
+    "vue-router": "3.5.1",
+    "axios": "0.21.1",
+    "vuex": "3.6.2",
+    "firebase": "8.6.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "node-sass": "^4.12.0",
+    "@vue/cli-plugin-babel": "4.5.12",
+    "@vue/cli-plugin-router": "4.5.12",
+    "@vue/cli-service": "4.5.12",
+    "node-sass": "^4.13.0",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-cli-plugin-quasar": "3.0.1",
+    "vue-template-compiler": "2.6.12",
+    "firebase-tools": "9.10.2",
+    "font-awesome": "4.7.0",
+    "@fortawesome/fontawesome-free": "5.15.3"
   }
 }

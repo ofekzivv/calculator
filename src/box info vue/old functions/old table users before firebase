@@ -1,0 +1,52 @@
+export default {
+  name: "tableUsers",
+  props: ['tableName', 'reload', 'searchItem', 'sortedArr'],
+  data() {
+    return {
+      columns: [
+
+        {name: 'firstName', align: 'center', label: 'שם פרטי', field: 'firstName', sortable: true},
+        {name: 'lastName', align: 'center', label: 'שם משפחה', field: 'lastName', sortable: true},
+        {name: 'employeeId', label: 'שכר שעתי', field: 'employeeId'},
+        {name: 'jobTitle', label: 'סוג עבודה', field: 'jobTitle', sortable: true},
+        {name: 'actions', label: 'פעולות משתמש', field: 'actions', sortable: true},
+      ],
+
+      rows: []
+    }
+  },
+  methods: {
+    read() {
+      api.get({entity: this.tableName})
+          .then(data => {
+        this.rows = data
+      })
+
+      // this.rows = localStorageDriver.selectFromDB(this.tableName);
+    },
+
+    deleteEmployee(id) {
+      api.remove({entity: this.tableName, employeeId:id})
+      .then(() => {
+        this.read();
+      })
+    },
+
+    updateEmployee(id) {
+      this.$router.push(`/update/${id}`);
+    }
+  },
+  created() {
+    this.read()
+  },
+
+  watch: {
+    reload() {
+      this.read()
+    },
+
+    searchItem() {
+      this.rows = this.sortedArr;
+    }
+  }
+}

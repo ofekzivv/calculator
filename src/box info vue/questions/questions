@@ -1,0 +1,62 @@
+questions about vue projects:
+//////////////////////////////
+
+1-how i know what should i install (which dependencies and devDependencies)
+מה שנכנס ל devDependencies זה רק מה שלא אמור לשבת בתוך התוכנה שלך בשרת כמו למשל:
+ sass-loader וכל מיני תוכנות שקשורת ל cli כמו webpack וכו'
+
+2-explanation about : assets, public, and other directory
+תקיית assests היא בשביל קבצים ותמונות שאתה רוצה לשמור בשרת ולא קשור לקוד.
+ תיקיינת public היא התיקיה של הקבצים שאמורים להיות ציבוריים שאחרי תהליך build יועברו לתוך תיקיית dist עולה אח"כ לשרת.
+
+3- i want to know little more about main.js, and App.vue and how App.vue was my first HomePage
+קובץ ה main.js הוא הקובץ הראשון שהמערכת שלך טוענת וממנו מתבצעת טעינה של כל שאר הקבצים,
+ אם תשים לב שם אנחנו מייצרים את ה instance של ה vue
+קובת ה app.vue זה הקומפוננטה הראשית שעוטפת את ה router-view שאליו טוענים את כל ה pages
+
+4- can i do  debbugger my app from node version and not just from inspect and if yes it could be like the
+ "server Runner" the we did in server-side that run all server in one click
+ אני לא מכיר דרך לדבאג את ה vue מתוך ה webstorm
+
+question about firebase/database:
+//////////////////////////////
+
+1-what the diffrence between rules firebase and validate?
+המטרה של ה rules הוא בעצם גם ליצור validation אבל גם להגן על הרשאות
+הבסיס של validations הוא לא להגן על הבקשות, לא קשור להרשאות
+
+2-how func word "once" worked in database/firebase?
+המילה once משמעות שלה הוא לקבל את הנתונים פעם אחת,
+ בניגוד ל subscribe שאני מלמד on event שהוא תמיד מאזין לשינויים ב DB בזמן אמת
+
+3= after we open file of database, how it replace our "axios server-side"?
+פיירבייס נותנים לך סוג של axiox מובנה בתוך החבילה שלהם
+
+4-how can i play with parameters of database ?
+
+questions about deploy/hosting:
+//////////////////////////////
+
+1-how can i my app domain?
+יש לך הסבר אצלם באתר. בעקרון אתה קונה דומיין, יש לך אתרים שמוכרים דומיינים,
+ ואחרי זה אתה מגדיר את ה dns ips - אולי נעשה על זה סרטון בהתחזקות. אבל יש הרבה סרטונים ביוטיוב
+
+2-when i want to do deploy?
+ברגע שאתה רוצה לעדכן את האתר שלך ציבורית
+
+3-which parameters should i check before deploy
+אתה צריך לבדוק שפיתחת את מה שרצית, לבדוק שאין באגים, לבדוק שאין חדירות ב rules , אתם תלמדו את זה בחודש השלישי
+
+4-more about action "--only" and dist directory
+המילה only אמורה להגיד ל deployשיעשה עדכון deploy רק למה שאתה בוחר,
+ במקום לעשות deploy להכל, אני רוצה לבחור לעשות לדוגמא רק ל hosting או רק ל functions
+
+3- which actions i need to know in firebase in terminal
+הפקודת שאני משתמש בהם לרוב הם:
+firebase deploy
+firebase projects:list
+
+4-if express was my server-side how i deploy mu app and create domain
+שאלה מצויינת, בשביל זה אתה צריך לבנות webapp דרך could platform כלשהו
+יש לך למשל את הרוקו, יש לך את google cloud, mifrosoft azure' amazon aws וכו'
+אתה יכול גם לקנות שרת עם מערכת הפעלה ולהתקין עליו node עם הקוד שלך

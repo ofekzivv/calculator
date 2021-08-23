@@ -8,11 +8,11 @@ import firebaseInstance from "./middleware/firebase"
 Vue.config.productionTip = false
 
 firebaseInstance.firebase.auth().onAuthStateChanged((user) => {
-  window.user = user;
+    window.user = user;
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+    new Vue({
+        router,
+        store,
+        render: h => h(App)
+    }).$mount('#app')
 })

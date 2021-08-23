@@ -11,11 +11,12 @@
             icon="menu"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title style="text-align: center">
+          מחשבון שכר
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+
+        <!--        <div>Quasar v{{ $q.version }}</div>-->
       </q-toolbar>
     </q-header>
 
@@ -85,6 +86,7 @@
 
 
 import Home from "./views/Home";
+import firebaseInstance from "./middleware/firebase";
 
 export default {
   name: 'LayoutDefault',
@@ -97,9 +99,11 @@ export default {
     return {
       leftDrawerOpen: false
     }
-  }
+  },
+
 }
 </script>
 
 <style>
+
 </style>

@@ -1,0 +1,14 @@
+ here we use- "this.$emit('itemAdded');" as event listener
+ and act with classic event that component send event to his dad(his view page:"backOffice")
+ and then "backOffice" activate func that change value of variable from false to true and opposite
+ then catch the variable into props in other component
+ and put "watch" on this props
+
+old addEmployee:
+
+ addEmployee() {
+      firebaseDatabase.create({entity: this.tableName, employees: this.employee})
+          .then(() => {
+             this.$emit('itemAdded');
+          })
+    },

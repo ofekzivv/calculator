@@ -15,14 +15,14 @@ export default {
         delete state.editedCalculation.id;
     }),
 
-    deleteEmployee: ((state, employeeId) => {
-        const index = state.employees.findIndex(obj => obj.id = employeeId)
-        state.employees.splice(index, 1)
+    deleteCalculation: ((state, CalculationId) => {
+        const index = state.calculations.findIndex(obj => obj.id = CalculationId)
+        state.calculations.splice(index, 1)
     }),
 
-    editEmployee: ((state, employee) => {
-        const index = state.employees.findIndex(obj => obj.id = employee.id)
-        state.employees.splice(index, 1, employee)
+    editCalculation: ((state, calculation) => {
+        const index = state.calculations.findIndex(obj => obj.id = calculation.id)
+        state.calculations.splice(index, 1, calculation)
     }),
 
     insertCalculation: ((state, calculation) => {

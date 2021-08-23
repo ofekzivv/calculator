@@ -7,7 +7,7 @@ export default {
         commit('setEmployees', employees)
     },
 
-    deleteEmployee: async ({state, commit}) => {
+    deleteEmployee: async ({state, commit},id) => {
         await database.remove({entity: 'employees', id: state.editedEmployeeId});
 
         const employeeId = state.editedEmployeeId;

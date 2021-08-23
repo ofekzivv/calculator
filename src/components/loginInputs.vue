@@ -103,9 +103,6 @@ export default {
     },
   },
   created() {
-    // if (!window.user){
-    //   this.$router.push(`/`)
-    // }else
     if (window.user) { // אם יש יוזר מחובר הוא יישלח ישירות לדף הבית
       this.$router.push(`/HomePage`)
     }
@@ -114,9 +111,7 @@ export default {
 
 </script>
 
-
 <style scoped>
-
 
 </style>
 

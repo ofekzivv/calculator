@@ -8,7 +8,8 @@ export default {
     remove,
     updateItem,
     selectById,
-    getRef
+    getRef,
+    getHashRef
 }
 
 function getRef(options) {
@@ -30,9 +31,16 @@ function read(options) {
         })
 }
 
-function create(options) {
-    return firebaseInstance.firebase.database().ref(`employees/${window.user.uid}/data/${options.entity}`).push(options.item);
+async function create(options) {
+    const salaryRef = await firebaseInstance.firebase.database().ref(`employees/${window.user.uid}/data/${options.entity}`).push(options.item)
+
+    // create hashmap
+    const salary = options.item;
+    salary.date = new Date(salary.firstDate);
+    firebaseInstance.firebase.database().ref(`employees/${window.user.uid}/data/dateHM/${salary.date.getFullYear()}/${salary.date.getMonth() + 1}`).push(salaryRef.key)
+    return salaryRef;
 }
+
 
 function remove(options) {
     return firebaseInstance.firebase.database().ref(`employees/${window.user.uid}/data/${options.entity}/${options.id}`).remove()
@@ -54,4 +62,22 @@ function selectById(options) {
             const obj = result.val();
             return obj
         })
+}
+
+async function getHashRef(options) {
+    const salariesArr = [];
+    const salariesId = [];
+    await firebaseInstance.firebase.database().ref(`employees/${window.user.uid}/data/dateHM/${options.year}/${options.month + 1}`)
+        .once('value', result => {
+            result.forEach((childSnapshot) => {
+                salariesId.push(childSnapshot.val());
+            })
+        })
+    for (const id of salariesId) {
+        console.log(salariesId)
+        let salary = await selectById({entity: "Calculations", id});
+        salariesArr.push(salary);
+    }
+    console.log(salariesArr);
+    return salariesArr
 }
