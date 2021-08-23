@@ -1,4 +1,4 @@
-import firebaseInstance from "../../index";
+import firebaseInstance from "../index";
 import database from 'firebase/database';
 
 module.exports = {
